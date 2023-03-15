@@ -153,7 +153,7 @@ window.onload = function () {
   window.game = new Game({
     onload: function () {
       // Create 80 coins with a spawn interval of 100ms and animation duration of 5000ms.
-      createParticleSystems(80, 100);
+      createParticleSystems(80, 100, 5000);
     },
   });
 };
