@@ -1,10 +1,11 @@
 // ----- Start of the assigment ----- //
 class ParticleSystem extends PIXI.Container {
-  constructor() {
+  //   Optional parameter is added as the duration of animation might be dependent on some external value, allowing for greater flexibility and control over the effect.
+  constructor(duration) {
     super();
     // Set start and duration for this effect in milliseconds
     this.start = 0;
-    this.duration = 6000;
+    this.duration = duration || 6000; //Default duration value is 6000ms
     // Create a sprite
     let sp = game.sprite("CoinsGold000");
     // Set pivot to center of the sprite
@@ -135,11 +136,11 @@ class Game {
   }
 }
 
-// This function manages number of coins and interval they are added into the game
-function createParticleSystems(numOfCoins, startInterval) {
+// This function sets number of coins and interval that are added into the game
+function createParticleSystems(numOfCoins, startInterval, duration) {
   for (let i = 0; i < numOfCoins; i++) {
     // Create a new ParticleSystem instance
-    let particleSystem = new ParticleSystem();
+    let particleSystem = new ParticleSystem(duration);
     // Set the start time of the ParticleSystem instance based on the index and start interval
     particleSystem.start = i * startInterval;
     // Add the ParticleSystem instance to the game
@@ -151,7 +152,7 @@ window.onload = function () {
   // Create a new Game instance and set it to the global variable "game"
   window.game = new Game({
     onload: function () {
-      // Create 80 coins with a start interval of 100ms
+      // Create 80 coins with a spawn interval of 100ms and animation duration of 5000ms.
       createParticleSystems(80, 100);
     },
   });
