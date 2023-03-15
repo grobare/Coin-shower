@@ -1,6 +1,6 @@
 // ----- Start of the assigment ----- //
 class ParticleSystem extends PIXI.Container {
-  //   Optional parameter is added as the duration of animation might be dependent on some external value, allowing for greater flexibility and control over the effect.
+  //   Optional parameter is added as the duration of animation might be dependent on some external value
   constructor(duration) {
     super();
     // Set start and duration for this effect in milliseconds
