@@ -43,7 +43,7 @@ class ParticleSystem extends PIXI.Container {
     this.sp.alpha = 1 - nt;
 
     // Animate rotation
-    this.sp.rotation = nt * Math.PI * 2;
+    this.sp.rotation = nt * Math.PI * 4;
   }
 }
 
