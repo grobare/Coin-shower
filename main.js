@@ -4,7 +4,7 @@ class ParticleSystem extends PIXI.Container {
     super();
     // Set start and duration for this effect in milliseconds
     this.start = 0;
-    this.duration = 5000;
+    this.duration = 6000;
     // Create a sprite
     let sp = game.sprite("CoinsGold000");
     // Set pivot to center of the sprite
@@ -15,16 +15,26 @@ class ParticleSystem extends PIXI.Container {
     // Save a reference to the sprite particle
     this.sp = sp;
 
-    // Set the initial position to the center of the screen
+    // Set the initial position to the center of the container
     this.sp.x = 400;
     this.sp.y = 225;
 
-    // Generate random angle and speed for the particle
+    // Set the initial scale and alpha values to 0
+    this.sp.scale.x = this.sp.scale.y = 0;
+    this.sp.alpha = 0;
+
+    // Generate random angle with radians and speed for the particle
     this.angle = Math.random() * Math.PI * 2;
     this.speed = 100 + Math.random() * 300;
   }
 
   animTick(nt, lt, gt) {
+    // Every update we get three different time variables: nt, lt and gt.
+    //   nt: Normalized time in procentage (0.0 to 1.0) and is calculated by
+    //       just dividing local time with duration of this effect.
+    //   lt: Local time in milliseconds, from 0 to this.duration.
+    //   gt: Global time in milliseconds.
+
     // Set a new texture on a sprite particle
     let num = ("000" + Math.floor(nt * 8)).substr(-3);
     game.setTexture(this.sp, "CoinsGold" + num);
@@ -32,7 +42,7 @@ class ParticleSystem extends PIXI.Container {
     // Calculate the distance the particle should move based on normalized time
     let distance = nt * this.speed;
 
-    // Update the position of the particle using polar coordinates
+    // Update the position of the particle from center using polar coordinates
     this.sp.x = 400 + Math.cos(this.angle) * distance;
     this.sp.y = 225 + Math.sin(this.angle) * distance;
 
@@ -140,9 +150,9 @@ function createParticleSystems(numOfCoins, startInterval) {
 window.onload = function () {
   // Create a new Game instance and set it to the global variable "game"
   window.game = new Game({
-    // When the assets are loaded, create 80 coins with a start interval of 40ms
     onload: function () {
-      createParticleSystems(80, 40);
+      // Create 80 coins with a start interval of 100ms
+      createParticleSystems(80, 100);
     },
   });
 };
