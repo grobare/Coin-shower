@@ -125,15 +125,24 @@ class Game {
   }
 }
 
+// This function manages number of coins and interval they are added into the game
+function createParticleSystems(numOfCoins, startInterval) {
+  for (let i = 0; i < numOfCoins; i++) {
+    // Create a new ParticleSystem instance
+    let particleSystem = new ParticleSystem();
+    // Set the start time of the ParticleSystem instance based on the index and start interval
+    particleSystem.start = i * startInterval;
+    // Add the ParticleSystem instance to the game
+    game.addEffect(particleSystem);
+  }
+}
+
 window.onload = function () {
+  // Create a new Game instance and set it to the global variable "game"
   window.game = new Game({
+    // When the assets are loaded, create 80 coins with a start interval of 40ms
     onload: function () {
-      // Set the number of instances
-      for (let i = 0; i < 80; i++) {
-        let particleSystem = new ParticleSystem();
-        particleSystem.start = i * 40; // Set the start time for each instance
-        game.addEffect(particleSystem);
-      }
+      createParticleSystems(80, 40);
     },
   });
 };
