@@ -5,7 +5,7 @@ class ParticleSystem extends PIXI.Container {
     super();
     // Set start and duration for this effect in milliseconds
     this.start = 0;
-    this.duration = duration || 6000; //Default duration value is 6000ms
+    this.duration = duration || 6000; // If there is no duration provided default duration value is set to 6000ms
     // Create a sprite
     let sp = game.sprite("CoinsGold000");
     // Set pivot to center of the sprite
@@ -24,7 +24,7 @@ class ParticleSystem extends PIXI.Container {
     this.sp.scale.x = this.sp.scale.y = 0;
     this.sp.alpha = 0;
 
-    // Generate random angle with radians and speed for the particle
+    // Generate random angle using radians and random speed for the particle
     this.angle = Math.random() * Math.PI * 2;
     this.speed = 100 + Math.random() * 300;
   }
@@ -40,7 +40,7 @@ class ParticleSystem extends PIXI.Container {
     let num = ("000" + Math.floor(nt * 8)).substr(-3);
     game.setTexture(this.sp, "CoinsGold" + num);
 
-    // Calculate the distance the particle should move based on normalized time
+    // Calculate the distance the particle should move based on nt
     let distance = nt * this.speed;
 
     // Update the position of the particle from center using polar coordinates
@@ -136,7 +136,7 @@ class Game {
   }
 }
 
-// This function sets number of coins and interval that are added into the game
+// Helper function that sets number of coins, interval in which they appear and also the length of the animation
 function createParticleSystems(numOfCoins, startInterval, duration) {
   for (let i = 0; i < numOfCoins; i++) {
     // Create a new ParticleSystem instance
@@ -152,8 +152,8 @@ window.onload = function () {
   // Create a new Game instance and set it to the global variable "game"
   window.game = new Game({
     onload: function () {
-      // Create 80 coins with a spawn interval of 100ms and animation duration of 5000ms
-      createParticleSystems(80, 100, 5000);
+      // Create 80 coins with a spawn interval of 100ms and animation duration of 6000ms which is also the default value
+      createParticleSystems(80, 100, 6000);
     },
   });
 };
